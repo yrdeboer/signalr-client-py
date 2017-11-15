@@ -39,14 +39,8 @@ class WebSocketsTransport(Transport):
         self._session.get(self._get_url('start'))
 
         def _receive():
-
-            while True:
-                try:
-                    notification = self.ws.recv()
-                    self._handle_notification(notification)
-                except Exception as ex:
-                    print('ws: ex: {}'.format(ex))
-                    break
+            for notification in self.ws:
+                self._handle_notification(notification)
 
         return _receive
 
