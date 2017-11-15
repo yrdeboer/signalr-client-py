@@ -59,6 +59,11 @@ class Connection:
     def wait(self, timeout=30):
         gevent.joinall([self.__greenlet], timeout)
 
+        ex = None
+        if hasattr(self.__greenlet, 'exception'):
+            ex = self.__greenlet.exception
+        return ex
+
     def send(self, data):
         self.__transport.send(data)
 
