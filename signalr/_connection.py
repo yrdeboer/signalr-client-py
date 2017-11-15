@@ -69,7 +69,7 @@ class Connection:
 
     def close(self):
         gevent.kill(self.__greenlet)
-        self.__transport.close()
+        # self.__transport.close()
 
     def register_hub(self, name):
         if name not in self.__hubs:
